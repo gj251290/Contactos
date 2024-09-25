@@ -38,6 +38,44 @@ public class Lista {
         return totalNodos;
     }
 
+    public Nodo obtener(int posicion) {
+        int p = 0;
+        Nodo apuntador = cabeza;
+
+        while (apuntador != null && p < posicion) {
+            apuntador = apuntador.siguiente;
+            p++;
+        }
+
+        return p == posicion && apuntador != null ? apuntador : null;
+    }
+
+    public void eliminar(Nodo n) {
+        if (n != null && cabeza != null) {
+            boolean encontardo = false;
+            Nodo apuntador = cabeza;
+            Nodo anterior = null;
+
+            while (!encontardo && apuntador != null) {
+                if (apuntador == n) {
+                    encontardo = true;
+                } else {
+                    anterior = apuntador;
+                    apuntador = apuntador.siguiente;
+                }
+            }
+
+            if (encontardo) {
+                if (anterior == null) {
+                    cabeza = apuntador.siguiente;
+                } else {
+                    anterior.siguiente = apuntador.siguiente;
+                }
+            }
+        }
+
+    }
+
     public void desdeArchivo(String nombreArchivo) {
         BufferedReader br = Archivo.abrirArchivo(nombreArchivo);
 
